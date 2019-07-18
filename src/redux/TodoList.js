@@ -1,16 +1,21 @@
 import React, { Component, Fragment } from 'react'
 import { Input, Button, List } from 'antd'
-
+import store from '../store'
+// 结合redux中的数据重新写TodoList
 class TodoList extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      inputValue: 'abc',
-      list: [1, 2, 3]
-    }
+    // 首先state的数据应该是从redux中取
+    this.state = store.getState()
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleBtnClick = this.handleBtnClick.bind(this)
     this.handleItemClick = this.handleItemClick.bind(this)
+    store.subscribe(() => {
+      this.setState(store.getState())
+    })
+  }
+  componentWillMount () {
+    console.log(store)
   }
   render () {
     // render函数必须是纯函数，也就是说render函数不能改变外部state
@@ -36,25 +41,30 @@ class TodoList extends Component {
   handleInputChange (e) {
     // 将e.target.value赋值给state中inputValue
     const inputValue = e.target.value
-    this.setState({
-      inputValue
-    })
-    console.warn(this.state.inputValue)
+    // 定义action
+    const action = {
+      type: 'handle_input_change',
+      value: inputValue
+    }
+    store.dispatch(action)
+    // this.setState({
+    //   inputValue
+    // })
   }
   handleBtnClick () {
-    // 点击时，将inputValue加入到list中
-    const list = [...this.state.list]
-    list.push(this.state.inputValue)
-    this.setState({
-      list
-    })
+    const value = this.state.inputValue
+    const action = {
+      type: 'handle_btn_click',
+      value
+    }
+    store.dispatch(action)
   }
   handleItemClick (index) {
-    const list =[...this.state.list]
-    list.splice(index, 1)
-    this.setState({
-      list
-    })
+    const action = {
+      type: 'handle_item_click',
+      index
+    }
+    store.dispatch(action)
   }
 }
 
