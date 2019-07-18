@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Input, Button, List } from 'antd'
 import store from '../store'
+import { getInputChangeAction, getBtnClickAction, getItemClickAction } from '../store/actionCreators'
 // 结合redux中的数据重新写TodoList
 class TodoList extends Component {
   constructor (props) {
@@ -42,28 +43,16 @@ class TodoList extends Component {
     // 将e.target.value赋值给state中inputValue
     const inputValue = e.target.value
     // 定义action
-    const action = {
-      type: 'handle_input_change',
-      value: inputValue
-    }
+    const action = getInputChangeAction(inputValue)
     store.dispatch(action)
-    // this.setState({
-    //   inputValue
-    // })
   }
   handleBtnClick () {
     const value = this.state.inputValue
-    const action = {
-      type: 'handle_btn_click',
-      value
-    }
+    const action = getBtnClickAction(value)
     store.dispatch(action)
   }
   handleItemClick (index) {
-    const action = {
-      type: 'handle_item_click',
-      index
-    }
+    const action = getItemClickAction(index)
     store.dispatch(action)
   }
 }

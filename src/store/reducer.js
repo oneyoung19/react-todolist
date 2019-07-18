@@ -1,3 +1,5 @@
+import { HANDLE_INPUT_CHANGE, HANDLE_BTN_CLICK, HANDLE_ITEM_CLICK} from '../store/actionTypes'
+
 const defaultState = {
   inputValue: '123',
   list: [1, 2, 3]
@@ -6,14 +8,14 @@ const defaultState = {
 export default (state = defaultState, action) => {
   console.warn(state, action)
   const newState = JSON.parse(JSON.stringify(state))
-  if (action.type === 'handle_input_change') {
+  if (action.type === HANDLE_INPUT_CHANGE) {
     newState.inputValue = action.value
   }
-  if (action.type === 'handle_btn_click') {
+  if (action.type === HANDLE_BTN_CLICK) {
     newState.list.push(action.value)
   }
-  if (action.type === 'handle_item_click') {
-    newState.list.splice(action.index, 1)
+  if (action.type === HANDLE_ITEM_CLICK) {
+    newState.list.splice(action.value, 1)
   }
   return newState
 }
