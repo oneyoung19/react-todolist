@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-import TodoList from './TodoList'
+import TodoList from './init/TodoList'
 
 ReactDOM.render(<TodoList />, document.getElementById('root'));
 
