@@ -15,3 +15,15 @@ react学习笔记
     this.props.change(e.target.value)
   }
 ```
+
+## 2.props传递事件时，该事件内发送action出现异常
+#### 父组件内代码
+![父组件内代码](public/assets/images/1564384146961.jpg)
+#### 子组件内代码
+![子组件内代码](public/assets/images/1564384278047.jpg)
+#### 错误信息代码
+![错误信息代码](public/assets/images/1564384333621.jpg)
+
+错误描述：
+  (1)父组件内通过props向子组件传递事件，该事件内向redux发送action
+  (2)点击事件触发后，控制台报错。
