@@ -5,7 +5,7 @@ class Item extends Component {
   // constructor (props) {
   //   super(props)
   //   // this.handleChange = this.handleChange.bind(this)
-  // }
+  // }f
   render () {
     const { name, itemvalue, change} = this.props
     return (
