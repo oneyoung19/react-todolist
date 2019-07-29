@@ -27,3 +27,11 @@ react学习笔记
 错误描述：
   (1)父组件内通过props向子组件传递事件，该事件内向redux发送action
   (2)点击事件触发后，控制台报错。
+  
+错误原因：
+```js
+  onClick={(index) => handleDelete(index)}
+  onCLick={() => handleDelete(index)}
+```
+(1) (index) => handleDelete(index),事件绑定的回调参数第一个是event,
+(2) 即使不论原因1，这种写法的index，也会是一个形参，而不是实参。！！！

@@ -4,7 +4,8 @@ class TodoItem extends Component {
   render () {
     const { index, handleDelete, item} = this.props
     return (
-      <div key={index} onClick={(index) => {handleDelete(index)}}>{item}</div>
+      // () => {handleDelete(index)}
+      <div key={index} onClick={() => {handleDelete(index)}}>{item}</div>
     )
   }
 }

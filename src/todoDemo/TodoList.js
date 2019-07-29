@@ -1,8 +1,7 @@
-import React, { Component, Fragment } from 'react'
-import TodoItem from './TodoItem'
-import { SearchBox, SearchResult, SearchButton } from './style'
+import React, { Component } from 'react'
 import store from './store/index'
 import { getInputChangeAction, getBtnClickAction, getItemDelete } from './store/actionCreators'
+import TodoListUI from './TodoListUI'
 
 class TodoList extends Component {
   constructor (props) {
@@ -21,20 +20,27 @@ class TodoList extends Component {
   }
   render () {
     return (
-      <Fragment>
-        <SearchBox className="searchBox">
-          <input type="text" value={this.state.inputValue} onChange={this.handleInputChange}/>
-          <SearchButton onClick={this.handleBtnClick}>确定</SearchButton>
-        </SearchBox>
-        <SearchResult className="searchResult">
-          {
-            this.state.list.map((item, index) => {
-              // return <div key={index} onClick={(index) => {this.handleDelete(index)}}>{item}</div>
-              return <TodoItem key={index} index={index} handleDelete={this.handleDelete} item={item}/>
-            })
-          }
-        </SearchResult>
-      </Fragment>
+      <TodoListUI
+        inputValue={this.state.inputValue}
+        handleInputChange={this.handleInputChange}
+        handleBtnClick={this.handleBtnClick}
+        list={this.state.list}
+        handleDelete={this.handleDelete}
+      />
+      // <Fragment>
+      //   <SearchBox className="searchBox">
+      //     <input type="text" value={this.state.inputValue} onChange={this.handleInputChange}/>
+      //     <SearchButton onClick={this.handleBtnClick}>确定</SearchButton>
+      //   </SearchBox>
+      //   <SearchResult className="searchResult">
+      //     {
+      //       this.state.list.map((item, index) => {
+      //         // return <div key={index} onClick={(index) => {this.handleDelete(index)}}>{item}</div>
+      //         return <TodoItem key={index} index={index} handleDelete={this.handleDelete} item={item}/>
+      //       })
+      //     }
+      //   </SearchResult>
+      // </Fragment>
     )
   }
   handleInputChange (e) {
